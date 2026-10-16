@@ -1,0 +1,556 @@
+@import "tailwindcss";
+
+/* Tell Tailwind v4 to use class-based dark mode (next-themes adds .dark to <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-sans), var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-display), var(--font-outfit), var(--font-sans), sans-serif;
+  --font-heading: var(--font-display), var(--font-sans), sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-serif: var(--font-serif), Newsreader, Georgia, Cambria, "Times New Roman", serif;
+  --font-typewriter: var(--font-typewriter), "Courier Prime", "Special Elite", Courier, monospace;
+  --font-handwriting: var(--font-handwriting), Caveat, Kalam, "Brush Script MT", cursive;
+}
+
+@layer base {
+  :root {
+    /* Font Fallbacks & Aliases */
+    --font-inter: var(--font-sans);
+    --font-outfit: var(--font-display);
+
+    /* 60% Canvas: Warm Parchment Alabaster */
+    --background: #FAF8F5;
+    --foreground: #171615;
+
+    /* 30% Structure: Crisp Studio Surface & Warm Clay Stone Border */
+    --card: #FFFFFF;
+    --card-border: #E7E4DC;
+    --muted: #F2EFEB;
+    --muted-foreground: #524E4A;
+    --subtle-foreground: #78736E;
+
+    /* 10% Complementary Accent: Burnished Terracotta & Deep Forest Jade */
+    --primary: #D9531E;
+    --primary-gradient: linear-gradient(135deg, #D9531E 0%, #C2410C 100%);
+    --secondary: #0D7B54;
+    --accent: #F59E0B;
+    --success: #059669;
+    --ring: rgba(217, 83, 30, 0.25);
+  }
+
+  .dark {
+    /* Font Fallbacks & Aliases */
+    --font-inter: var(--font-sans);
+    --font-outfit: var(--font-display);
+
+    /* 60% Canvas: Raw Obsidian Charcoal */
+    --background: #0C0D0F;
+    --foreground: #F6F5F2;
+
+    /* 30% Structure: Smoked Basalt Surface & Chiseled Carbon Border */
+    --card: #141619;
+    --card-border: #23262D;
+    --muted: #1A1D22;
+    --muted-foreground: #9CA3AF;
+    --subtle-foreground: #6B7280;
+
+    /* 10% Complementary Accent: Molten Terracotta & Luminous Forest Jade */
+    --primary: #F07A50;
+    --primary-gradient: linear-gradient(135deg, #F07A50 0%, #EA580C 100%);
+    --secondary: #10B981;
+    --accent: #FBBF24;
+    --success: #34D399;
+    --ring: rgba(240, 122, 80, 0.35);
+  }
+
+  html {
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    letter-spacing: -0.011em;
+  }
+
+  /* Display Headings Hierarchy */
+  h1, h2, h3, h4, h5, h6, .font-heading, .font-display {
+    font-family: var(--font-display), var(--font-sans), sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.028em;
+    text-wrap: balance;
+    color: var(--foreground);
+  }
+
+  h1 {
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-weight: 750;
+    letter-spacing: -0.028em;
+    line-height: 1.18;
+  }
+
+  h3 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* ━━━━━ TYPOGRAPHIC SCALE & EDITORIAL UTILITIES ━━━━━ */
+.display-hero {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+.display-title {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2.125rem, 5vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.032em;
+}
+
+.display-section {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.625rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.026em;
+}
+
+.display-card {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+/* Eyebrow Micro-Typography */
+.text-eyebrow {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+/* Tabular Numeric Figures for Streaks, Clocks, & Progress */
+.font-numeric {
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -0.02em;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Complementary Earth & Mineral Gradients */
+.text-gradient-terracotta {
+  background: linear-gradient(135deg, #F07A50 0%, #EA580C 50%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-jade {
+  background: linear-gradient(135deg, #34D399 0%, #10B981 50%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-amber {
+  background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 50%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom scrollbar in warm terracotta */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(224, 99, 50, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(224, 99, 50, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(240, 122, 80, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(240, 122, 80, 0.6);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(224, 99, 50, 0.25) transparent;
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(224, 99, 50, 0.25);
+  color: inherit;
+}
+
+/* Safe areas for modern mobile devices */
+.safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom, 20px), 16px);
+}
+
+.custom-scrollbar::-webkit-scrollbar { 
+  height: 5px; 
+  width: 5px; 
+}
+
+.custom-scrollbar::-webkit-scrollbar-track { 
+  background: transparent; 
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb { 
+  background-color: rgba(224, 99, 50, 0.25); 
+  border-radius: 20px; 
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb { 
+  background-color: rgba(240, 122, 80, 0.35); 
+}
+
+/* Smooth page entrance animation */
+main {
+  animation: pageIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Radiant Shimmer Utility */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2.2s infinite ease-in-out;
+}
+
+/* ━━━━━ FONT FAMILY UTILITIES ━━━━━ */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-typewriter {
+  font-family: var(--font-typewriter);
+}
+
+.font-handwriting {
+  font-family: var(--font-handwriting);
+}
+
+/* ━━━━━ CODEX RITUALIS: PHYSICAL TOME ARCHITECTURE ━━━━━ */
+:root {
+  --journal-line-height: 2.25rem; /* 36px */
+}
+
+/* Stacked Pages 3D Tome Thickness */
+.folio-tome-spread {
+  position: relative;
+  box-shadow: 
+    -4px 0 0 -1px #1a1816,
+    -4px 0 0 0 rgba(245, 158, 11, 0.18),
+    -8px 0 0 -2px #141210,
+    -8px 0 0 -1px rgba(245, 158, 11, 0.12),
+    -12px 0 0 -3px #0d0c0b,
+    -12px 0 0 -2px rgba(245, 158, 11, 0.08),
+    4px 0 0 -1px #1a1816,
+    4px 0 0 0 rgba(245, 158, 11, 0.18),
+    8px 0 0 -2px #141210,
+    8px 0 0 -1px rgba(245, 158, 11, 0.12),
+    12px 0 0 -3px #0d0c0b,
+    12px 0 0 -2px rgba(245, 158, 11, 0.08),
+    0 30px 75px -12px rgba(0, 0, 0, 0.95),
+    0 0 45px rgba(234, 88, 12, 0.1);
+}
+
+:root:not(.dark) .folio-tome-spread {
+  box-shadow: 
+    -4px 0 0 -1px #eae7de,
+    -4px 0 0 0 rgba(217, 83, 30, 0.14),
+    -8px 0 0 -2px #ded9cc,
+    -8px 0 0 -1px rgba(217, 83, 30, 0.09),
+    -12px 0 0 -3px #d3cdc0,
+    -12px 0 0 -2px rgba(217, 83, 30, 0.05),
+    4px 0 0 -1px #eae7de,
+    4px 0 0 0 rgba(217, 83, 30, 0.14),
+    8px 0 0 -2px #ded9cc,
+    8px 0 0 -1px rgba(217, 83, 30, 0.09),
+    12px 0 0 -3px #d3cdc0,
+    12px 0 0 -2px rgba(217, 83, 30, 0.05),
+    0 25px 60px -10px rgba(0, 0, 0, 0.28);
+}
+
+/* Deep Center Spine Gutter Crease & Curved Lighting */
+.folio-spine-gutter {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 64px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.18) 25%,
+    rgba(0, 0, 0, 0.72) 48%,
+    rgba(245, 158, 11, 0.16) 50%,
+    rgba(0, 0, 0, 0.72) 52%,
+    rgba(0, 0, 0, 0.18) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 25;
+}
+
+:root:not(.dark) .folio-spine-gutter {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.06) 25%,
+    rgba(0, 0, 0, 0.32) 48%,
+    rgba(217, 83, 30, 0.15) 50%,
+    rgba(0, 0, 0, 0.32) 52%,
+    rgba(0, 0, 0, 0.06) 75%,
+    transparent 100%
+  );
+}
+
+/* ━━━━━ TRUE INK-ON-PAPER BASELINE ALIGNED ENGINES ━━━━━ */
+.folio-recto-editor {
+  line-height: var(--journal-line-height) !important;
+  background-attachment: local !important;
+  padding-top: 0.35rem;
+}
+
+/* 1. Ruled Paper: Exact baseline resting rule */
+.paper-mode-ruled {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--journal-line-height) - 1px),
+    rgba(245, 158, 11, 0.13) calc(var(--journal-line-height) - 1px),
+    rgba(245, 158, 11, 0.13) var(--journal-line-height)
+  );
+  background-size: 100% var(--journal-line-height);
+  background-attachment: local;
+}
+
+:root:not(.dark) .paper-mode-ruled {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--journal-line-height) - 1px),
+    rgba(180, 83, 9, 0.16) calc(var(--journal-line-height) - 1px),
+    rgba(180, 83, 9, 0.16) var(--journal-line-height)
+  );
+}
+
+/* 2. Dot Grid: 24px x 36px aligned dot matrix */
+.paper-mode-dotgrid {
+  background-image: radial-gradient(circle, rgba(245, 158, 11, 0.22) 1.2px, transparent 1.2px);
+  background-size: 24px var(--journal-line-height);
+  background-attachment: local;
+}
+
+:root:not(.dark) .paper-mode-dotgrid {
+  background-image: radial-gradient(circle, rgba(180, 83, 9, 0.22) 1.2px, transparent 1.2px);
+}
+
+/* 3. Architect Grid: Engineering squares */
+.paper-mode-grid {
+  background-image: 
+    linear-gradient(to right, rgba(245, 158, 11, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(245, 158, 11, 0.1) 1px, transparent 1px);
+  background-size: 24px var(--journal-line-height);
+  background-attachment: local;
+}
+
+:root:not(.dark) .paper-mode-grid {
+  background-image: 
+    linear-gradient(to right, rgba(180, 83, 9, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(180, 83, 9, 0.12) 1px, transparent 1px);
+}
+
+/* 4. Blank Parchment */
+.paper-mode-blank {
+  background-image: none !important;
+}
+
+/* Legacy support aliases */
+.notebook-paper-ruled {
+  line-height: var(--journal-line-height) !important;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--journal-line-height) - 1px),
+    rgba(245, 158, 11, 0.13) calc(var(--journal-line-height) - 1px),
+    rgba(245, 158, 11, 0.13) var(--journal-line-height)
+  );
+  background-size: 100% var(--journal-line-height);
+  background-attachment: local;
+}
+
+/* ━━━━━ INK CURING / DRYING GLOW SWEEP ━━━━━ */
+@keyframes inkCureSweep {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.animate-ink-curing {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(245, 158, 11, 0.05) 30%,
+    rgba(234, 88, 12, 0.3) 50%,
+    rgba(251, 191, 36, 0.25) 55%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 30;
+  animation: inkCureSweep 1.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ━━━━━ CODEX ARCHIVAL STAMP ANIMATION ━━━━━ */
+@keyframes stampPress {
+  0% {
+    transform: scale(1.4) rotate(-8deg);
+    opacity: 0;
+  }
+  65% {
+    transform: scale(0.96) rotate(-2deg);
+    opacity: 0.95;
+  }
+  85% {
+    transform: scale(1.02) rotate(-3.5deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1) rotate(-3deg);
+    opacity: 0.85;
+  }
+}
+
+.animate-codex-stamp {
+  animation: stampPress 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* ━━━━━ INTERACTIVE PAGE-CORNER CURL ━━━━━ */
+.page-corner-curl-left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(20, 18, 16, 0.95) 45%, transparent 50%);
+  box-shadow: 2px -2px 6px rgba(0, 0, 0, 0.45);
+  border-top-right-radius: 4px;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  z-index: 25;
+}
+
+.page-corner-curl-left:hover {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.38) 0%, rgba(40, 32, 24, 0.98) 45%, transparent 50%);
+  box-shadow: 4px -4px 14px rgba(0, 0, 0, 0.7);
+}
+
+.page-corner-curl-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(-135deg, rgba(245, 158, 11, 0.2) 0%, rgba(20, 18, 16, 0.95) 45%, transparent 50%);
+  box-shadow: -2px -2px 6px rgba(0, 0, 0, 0.45);
+  border-top-left-radius: 4px;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  z-index: 25;
+}
+
+.page-corner-curl-right:hover {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(-135deg, rgba(245, 158, 11, 0.38) 0%, rgba(40, 32, 24, 0.98) 45%, transparent 50%);
+  box-shadow: -4px -4px 14px rgba(0, 0, 0, 0.7);
+}
+
+/* ━━━━━ ILLUMINATED DROP CAP ━━━━━ */
+.drop-cap-lead::first-letter {
+  float: left;
+  font-family: var(--font-serif);
+  font-size: 3.35rem;
+  line-height: 2.85rem;
+  padding-top: 4px;
+  padding-right: 10px;
+  padding-bottom: 2px;
+  font-weight: 700;
+  color: #F59E0B;
+  text-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
+}
